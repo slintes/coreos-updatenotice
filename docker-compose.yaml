@@ -1,0 +1,19 @@
+version: "2"
+services:
+  redis:
+    image: redis:3.2-alpine
+  job:
+    build: job/
+    image: registry.honestbee.com/coreos-updatenotice
+    # tty: true
+    # stdin_open: true
+    # command: /bin/sh
+    environment:
+      - WEBHOOK_URL=http://echo:5000/echo
+      - COREOS_CHANNELS=alpha,beta
+    depends_on: 
+      - redis
+  echo:
+    build: echo-server/
+    image: registry.honestbee.com/echo-server
+      

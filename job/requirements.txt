@@ -1,0 +1,4 @@
+# Jinja2==2.8
+python-decouple==3.0
+requests==2.9.1
+redis==2.10.5
