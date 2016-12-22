@@ -9,11 +9,12 @@ services:
     # stdin_open: true
     # command: /bin/sh
     environment:
-      - WEBHOOK_URL=http://echo:5000/echo
-      - COREOS_CHANNELS=alpha,beta
+      - WEBHOOK_URL=http://test-webhook:5000/echo
+      - COREOS_CHANNELS=stable,alpha
     depends_on: 
       - redis
-  echo:
+      - test-webhook
+  test-webhook:
     build: echo-server/
     image: so0k/echo-server
       
