@@ -4,7 +4,7 @@ services:
     image: redis:3.2-alpine
   job:
     build: job/
-    image: registry.honestbee.com/coreos-updatenotice
+    image: so0k/coreos-updatenotice
     # tty: true
     # stdin_open: true
     # command: /bin/sh
@@ -15,5 +15,5 @@ services:
       - redis
   echo:
     build: echo-server/
-    image: registry.honestbee.com/echo-server
+    image: so0k/echo-server
       
