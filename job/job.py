@@ -55,7 +55,7 @@ def test_and_trigger(channel,new,key,url):
     if old == {} or (old[key] != new[key]):
         print "coreos:{channel} - {key} change detected, calling: {webhook}" \
               .format(channel=channel,key=key,webhook=url)
-        data={"old":old,"new":new}
+        data={"channel":channel,"old":old,"new":new}
         p = requests.post(url,json=data)
         print "POST {url} returned status_code: {status_code}".format(
                 url=url,status_code=p.status_code)
