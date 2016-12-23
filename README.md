@@ -42,3 +42,30 @@ docker-compose exec redis redis-cli
 >hset coreos:alpha COREOS_VERSION 1
 ```
 
+## Kubernetes CronJob
+
+Note: At the time of writing, [CronJob](http://kubernetes.io/docs/user-guide/cron-jobs/) 
+is still in Alpha stage. To use it we need to run API Server with alpha features enabled:
+```
+--runtime-config=batch/v2alpha1
+```
+
+If you choose to use a webhook (i.e. [cog trigger](http://cog-book.operable.io/#_triggers)).
+Store the reference to the webhook in a configmap:
+```
+/kubectl create cm coreos-updatenotice --from-literal=webhook_url=https://cog.example.com:4001/v1/triggers/00000000-0000-0000-0000-000000000000
+```
+
+Create Redis service and deployment 
+```
+kubectl create -f k8s-manifests/02-redis-svc.yaml
+kubectl create -f k8s-manifests/03-redis-deploy.yaml
+```
+
+Create CronJob
+```
+kubectl create -f k8s-manifests/04-cronjob.yaml
+```
+
+Enjoy Cog notifications in Slack/HipChat when CoreOS channels change their current version!
+
