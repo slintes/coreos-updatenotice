@@ -53,7 +53,7 @@ is still in Alpha stage. To use it we need to run API Server with alpha features
 If you choose to use a webhook (i.e. [cog trigger](http://cog-book.operable.io/#_triggers)).
 Store the reference to the webhook in a configmap:
 ```
-/kubectl create cm coreos-updatenotice --from-literal=webhook_url=https://cog.example.com:4001/v1/triggers/00000000-0000-0000-0000-000000000000
+kubectl create cm coreos-updatenotice --from-literal=webhook_url=https://cog.example.com:4001/v1/triggers/00000000-0000-0000-0000-000000000000
 ```
 
 Create Redis service and deployment 

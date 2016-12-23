@@ -14,7 +14,7 @@ docker-build:
 ifndef TRAVIS
 	docker-compose build
 else
-	docker build --rm ${MUTABLE_IMAGE} .
+	docker build --rm ${MUTABLE_IMAGE} job/
 endif
 	docker tag ${MUTABLE_IMAGE} ${IMAGE}
 
