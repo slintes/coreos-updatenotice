@@ -1,20 +1,19 @@
 apiVersion: batch/v2alpha1
-kind: CronJob
+kind: ScheduledJob
 metadata:
-  name: coreos-updatecheck
+  name: coreos-updatenotice
 spec:
-  # https://crontab.guru/#0_9_*_*_*
-  schedule: "*/1 * * * *"
+  schedule: "*/15 * * * *"
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: script
-            image: so0k/coreos-updatenotice
+          - name: coreos-updatenotice
+            image: slintes/coreos-updatenotice
             env:
               - name: COREOS_CHANNELS
-                value: stable,beta,alpha
+                value: stable,beta
               - name: WEBHOOK_KEY
                 value: COREOS_VERSION
               - name: WEBHOOK_URL
@@ -23,7 +22,7 @@ spec:
                     name: coreos-updatenotice
                     key: webhook_url
               - name: REDIS_HOST
-                value: coreos-updatenotice-redis
+                value: redis
               - name: REDIS_PORT
                 value: "6379"
           restartPolicy: OnFailure

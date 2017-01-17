@@ -19,7 +19,7 @@ r = redis.StrictRedis(host=REDIS_HOST,port=REDIS_PORT)
 # @retry
 def save(channel,dataset):
     try:
-        r.hmset("coreos:{channel}".format(channel=channel),dataset)
+        r.hmset("coreos-updatenotice:{channel}".format(channel=channel),dataset)
         msg = "Saved data for current coreos {channel} release to " \
               "redis://{host}:{port}".format(
               channel=channel,host=REDIS_HOST,port=REDIS_PORT)
@@ -51,11 +51,12 @@ def curl(channel):
         raise Exception(msg)
 
 def test_and_trigger(channel,new,key,url):
-    old=r.hgetall("coreos:{channel}".format(channel=channel))
+    old=r.hgetall("coreos-updatenotice:{channel}".format(channel=channel))
     if old == {} or (old[key] != new[key]):
         print "coreos:{channel} - {key} change detected, calling: {webhook}" \
               .format(channel=channel,key=key,webhook=url)
-        data={"channel":channel,"old":old,"new":new}
+        message = "New CoreOS release: channel: " + str(channel) + ", version: " + str(new[WEBHOOK_KEY]) + ", <https://coreos.com/releases/#" + str(new[WEBHOOK_KEY] + "|Release Notes>")
+        data={"username": "CoreOS Update", "icon_url": "https://avatars2.githubusercontent.com/u/3730757?v=3&s=280", "text": message}
         p = requests.post(url,json=data)
         print "POST {url} returned status_code: {status_code}".format(
                 url=url,status_code=p.status_code)

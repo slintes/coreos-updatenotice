@@ -1,3 +1,8 @@
+This is a fork of https://github.com/honestbee/coreos-updatenotice.
+It uses a notification format which can be directy used for Slack Webhooks.
+
+Original Readme:
+
 # CoreOS Update Notice
 
 This python script will query CoreOS Release channels and store the result to 

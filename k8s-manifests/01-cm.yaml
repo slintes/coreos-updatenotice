@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: coreos-updatenotice
 data:
-  webhook_url: https://cog.example.com:4001/v1/triggers/00000000-0000-0000-0000-000000000000
+  webhook_url: https://hooks.slack.com/services/xxxxxx
