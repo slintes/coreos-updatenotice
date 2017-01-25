@@ -8,6 +8,7 @@ spec:
     spec:
       template:
         spec:
+          dnsPolicy: ClusterFirst
           containers:
           - name: coreos-updatenotice
             image: slintes/coreos-updatenotice

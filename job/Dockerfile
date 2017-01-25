@@ -1,4 +1,4 @@
-FROM python:2-slim
+FROM python:2-alpine
 
 COPY requirements.txt /usr/src/app/requirements.txt
 WORKDIR /usr/src/app
