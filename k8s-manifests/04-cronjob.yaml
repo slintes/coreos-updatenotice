@@ -4,11 +4,13 @@ metadata:
   name: coreos-updatenotice
 spec:
   schedule: "*/15 * * * *"
+  concurrencyPolicy: "Replace"
   jobTemplate:
     spec:
       template:
         spec:
           dnsPolicy: ClusterFirst
+          restartPolicy: "Never"
           containers:
           - name: coreos-updatenotice
             image: slintes/coreos-updatenotice
@@ -26,4 +28,3 @@ spec:
                 value: redis
               - name: REDIS_PORT
                 value: "6379"
-          restartPolicy: OnFailure
